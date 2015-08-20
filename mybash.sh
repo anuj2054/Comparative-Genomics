@@ -96,6 +96,8 @@ echo "trimming the alignments"
 done
 done
 
+##### testing out git ######
+
 
 ########################## making the tree ################################3333
 
