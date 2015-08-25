@@ -144,8 +144,7 @@ done
 
 # find the tol-mirror tree too and execute that
 # distory kdetrees or dendextend or ape
-# SH test
-# also make gene trees or species tree find what these are in R CRAN
+# SH test to compare the topologies of the different trees obtained.
 # ancestral state reconstruction
 # diversification time
 

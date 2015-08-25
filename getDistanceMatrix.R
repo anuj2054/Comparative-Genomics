@@ -99,10 +99,22 @@ i=i+1
 #mytable[2,2] <- cophenetic(mytrees[[2]])[species[2],species[4]]
 
 write.table(mytable,file="mytable")
+library(corrgram)
+corrgram(mytable,upper.panel=NULL,lower.panel=panel.shade,main="evolutionary correlation between nerve muscle and neurotoxin pathways in cnidaria")
 
-#}
-#cor(mytable)
-#correlagram(mytable)
+#make plot
+#dev.print(pdf, file="filename.pdf");
+#or
+#make plot
+#dev.copy(device = png, filename = 'MyPlot.png', width = 1000, height = 500) 
+#dev.off()
+#or
+#pdf('filename.pdf')
+# make plot
+#dev.off()
+
+
+
 
 ######################################################################################3
 #matrix1<-cophenetic(tree1)
