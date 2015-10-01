@@ -13,6 +13,8 @@ java -jar /home/dnarules/Downloads/Trimmomatic-0.33/trimmomatic-0.33.jar PE SRR1
 fastqc SRR1952742_1_paired_trimmed.fastq --outdir=/mnt/dnarules/Anuj/
 fastqc SRR1952742_2_paired_trimmed.fastq --outdir=/mnt/dnarules/Anuj/
 
+sed '1~4 s/$/ \/2/g' SRR1819888_2_paired_trimmed.fastq > SRR1819888_2_paired_trimmed_mod.fastq
+
 /home/dnarules/trinityrnaseq_r20140717/Trinity --seqType fq --left /mnt/dnarules/Anuj/SRR1952742_1_paired_trimmed.fastq --right /mnt/dnarules/Anuj/SRR1952742_2_paired_trimmed.fastq --CPU 18 --JM 50G
 
 #### need to do some ORF or CDS prediction here ... we do not need to do annotation. 
