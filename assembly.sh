@@ -1,7 +1,11 @@
 #wget -r --no-parent ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP/SRP060/SRP060291
 # the wget is not needed since all files can be downloaded directly from the fastq-dump command, and no FTP is encouraged by NCBI anymore. 
 
+wget ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR181/SRR1819888/SRR1819888.sra
+
 fastq-dump --split-files SRR1952742
+
+fastq-dump --defline-seq '@$sn[_$rn]/$ri' --split-files SRR1819888.sra
 
 # concantenate them before or after the fastqc process ???? 
 
@@ -13,11 +17,12 @@ java -jar /home/dnarules/Downloads/Trimmomatic-0.33/trimmomatic-0.33.jar PE SRR1
 fastqc SRR1952742_1_paired_trimmed.fastq --outdir=/mnt/dnarules/Anuj/
 fastqc SRR1952742_2_paired_trimmed.fastq --outdir=/mnt/dnarules/Anuj/
 
-sed '1~4 s/$/ \/1/g' SRR1819888_1_paired_trimmed.fastq > SRR1819888_1_paired_trimmed_mod.fastq
-sed '1~4 s/$/ \/2/g' SRR1819888_2_paired_trimmed.fastq > SRR1819888_2_paired_trimmed_mod.fastq
-
-/home/dnarules/trinityrnaseq_r20140717/Trinity --seqType fq --left /mnt/dnarules/Anuj/SRR1952742_1_paired_trimmed.fastq --right /mnt/dnarules/Anuj/SRR1952742_2_paired_trimmed.fastq --CPU 18 --JM 50G
+/home/dnarules/trinityrnaseq_r20140717/Trinity --seqType fq --left /mnt/dnarules/Anuj/SRR1952742_1_paired_trimmed.fastq --right /mnt/dnarules/Anuj/SRR1952742_2_paired_trimmed.fastq --CPU 18 --max_memory 50G
 
 #### need to do some ORF or CDS prediction here ... we do not need to do annotation. 
+
+TransDecoder.LongOrfs -t trinity_out_dir/Trinity.fasta
+
+TransDecoder.Predict -t trinity_out_dir/Trinity.fasta
 
 
